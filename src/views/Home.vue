@@ -3,18 +3,18 @@
         <!-- Delete Task Popup Start -->
         <div v-if="deleteTaskFlag" class="">
             <div class="fixed inset-0 flex items-center justify-center z-50 bg-black/80">
-                <div class="bg-purple-900 rounded-lg shadow-md w-80 border divide-y divide-solid">
-                    <div>
+                <div class="rounded-lg shadow-md w-80 divide-y divide-solid">
+                    <div class="bg-purple-900 rounded-t-lg">
                         <h2 class="p-4 text-xl text-white font-medium" align="left">Delete Task</h2>
                     </div>
                     
-                    <div class="p-4">
+                    <div class="p-4 bg-white rounded-b-lg">
                         <!-- Form -->
-                        <p class="pb-2 text-lg text-white" align="left">Are you sure you want to delete the task?</p>
+                        <p class="pb-2 text-lg text-purple-900" align="left">Are you sure you want to delete the task?</p>
                         
                         <div class="flex justify-end align-center">
-                            <button class="text-white px-4 py-2 w-24 font-bold rounded" @click="discardDeleteTask()"><span class="">Cancel</span></button>
-                            <button class="bg-purple-100 text-purple-900 px-4 py-2 w-24 font-bold rounded" @click="deleteTask()"><span class="">Delete</span></button>
+                            <button class="text-purple-900 px-4 py-2 w-24 font-bold rounded" @click="discardDeleteTask()"><span class="">Cancel</span></button>
+                            <button class="bg-red-400 text-white px-4 py-2 w-24 font-bold rounded" @click="deleteTask()"><span class="">Delete</span></button>
                         </div>
                     </div>
                 </div>
@@ -55,9 +55,9 @@
             </button>
         </div>
 
-        <div>
+        <div class="pb-8">
             <!-- List of ToDos -->
-            <div class="mx-6 my-4 h-[88vh] rounded-lg">
+            <div class="mx-6 my-8 rounded-lg">
                 <!-- Filter Type -->
                 <div class="pb-8">
                     <p class="text-xl text-purple-900 font-bold" align="left">{{ filterValue }}</p>
@@ -68,38 +68,39 @@
                         <div class="pb-4">
                             <form id="add-task-form" action="#" @submit="validateForm()">
                                 <div class="pb-4 flex align-center">
-                                    <div class="flex align-center">
+                                    <!-- <div class="flex align-center">
                                         <button class="h-8 w-8 self-center" v-if="newTask.task_status == 'COMPLETED'" @click="toggleCompleteStatus('new')">
                                             <img src="../assets/checked_checkbox_icon.svg">
                                         </button>
                                         <button class="h-8 w-8 self-center" v-else @click="toggleCompleteStatus('new')">
                                             <img src="../assets/unchecked_checkbox_icon.svg">
                                         </button>
-                                    </div>
-
+                                    </div> -->
+                                    
                                     <input
                                         required
                                         required:border-red-500
                                         invalid:border-red-500
                                         invalid:text-red-600
-                                        maxlength="30"
+                                        maxlength="50"
                                         :class="[newTask.task_status == 'COMPLETED' ? 'line-through' : '']"
-                                        class="appearance-none w-full ml-4 py-2 px-3 bg-purple-100 text-lg text-purple-900 rounded leading-tight focus:outline-none focus:shadow-outline"
+                                        class="appearance-none w-full py-2 px-3 bg-purple-100 text-lg text-purple-900 rounded leading-tight focus:outline-none focus:shadow-outline"
                                         id="task" type="text" placeholder="Enter task"
                                         v-model="newTask.task_message"
                                     >
                                 </div>
 
                                 <div class="flex align-center">
-                                    <img class="h-8 w-8 self-center" src="../assets/due_date_icon.svg">
+                                    <!-- <img class="h-8 w-8 self-center" src="../assets/due_date_icon.svg"> -->
 
                                     <input
                                         required
                                         required:border-red-500
                                         invalid:border-red-500
                                         invalid:text-red-600
-                                        class="appearance-none w-full ml-4 py-2 px-3 text-lg bg-purple-100 text-purple-900 rounded leading-tight focus:outline-none focus:shadow-outline"
-                                        id="due-date" type="date" placeholder="Enter due date (DD-MM-YYYY)"
+                                        class="appearance-none w-full py-2 px-3 text-lg bg-purple-100 text-purple-900 rounded leading-tight focus:outline-none focus:shadow-outline"
+                                        id="due-date" type="text" placeholder="Enter due date"
+                                        onfocus="(type='date')"
                                         v-model="newTask.due_date"
                                     >
                                 </div>
@@ -113,7 +114,7 @@
                     </div>
                 </div>
 
-                <div v-if="tasksToDisplay && tasksToDisplay.length > 0">
+                <div class="" v-if="tasksToDisplay && tasksToDisplay.length > 0">
                     <div v-for="task, index in tasksToDisplay" :key="index"
                         class="my-4 first:mt-0 last:mb-0 h-fit rounded-lg ring-2"
                         :class="[task.task_status == 'OVERTIME_PENDING' ? 'ring-red-400' : task.task_status == 'COMPLETED' ? 'ring-green-400' : 'ring-purple-400']"
@@ -131,9 +132,9 @@
                                     </div>
 
                                     <div class="flex flex-col align-center">
-                                        <p :class="[task.task_status == 'COMPLETED' ? 'line-through' : '']" class="mx-4 pb-2 text-xl text-purple-900 rounded" align="left">{{ task.task_message }}</p>
+                                        <p :class="[task.task_status == 'COMPLETED' ? 'line-through' : '']" class="mx-4 pb-2 break-all grow-0 shrink-1 text-xl text-purple-900 rounded" align="left">{{ task.task_message }}</p>
 
-                                        <div v-if="task.due_date" class="ml-4 flex align-center">
+                                        <div v-if="task.due_date" class="ml-4 grow-1 shrink-0 flex align-center">
                                             <img class="h-5 w-5 self-center" src="../assets/due_date_icon.svg">
                                             <!-- <p class="self-center text-lg text-purple-900 font-bold" align="left">Due by:</p> -->
 
@@ -237,7 +238,7 @@
                             
                             <div class="pt-4 flex justify-end">
                                 <button class="text-purple-900 font-bold px-4 py-2 min-w-[100px] rounded" @click="discardTask('edit')">Discard</button>
-                                <input class="bg-purple-900 font-bold text-white px-4 py-2 min-w-[100px] rounded" form="edit-form-id" type="submit" value="Edit">
+                                <input class="bg-purple-900 font-bold text-white px-4 py-2 min-w-[100px] rounded" form="edit-form-id" type="submit" value="Save">
                             </div>
                         </div>
                     </div>

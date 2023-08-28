@@ -63,7 +63,7 @@
                     <p class="text-xl text-purple-900 font-bold" align="left">{{ filterValue }}</p>
                 </div>
 
-                <div v-if="addTaskFlag" class="my-4 h-fit rounded-lg ring-2 ring-purple-400">
+                <div v-if="addTaskFlag" class="mb-4 h-fit rounded-lg ring-2 ring-purple-400">
                     <div class="h-full p-4 divide-y divide-purple-900">
                         <div class="pb-4">
                             <form id="add-task-form" action="#" @submit="validateForm()">
@@ -247,7 +247,7 @@
                     <div v-if="!addTaskFlag" class="pt-4">
                         <div v-if="filterValue == 'All Tasks'">
                             <img class="pb-4 h-20 w-20 inline" src="../assets/no_tasks_icon.svg">
-                            <p  class="text-xl text-purple-900 font-medium">Uh oh, No tasts yet.</p>
+                            <p  class="text-xl text-purple-900 font-medium">Uh oh, No tasks yet.</p>
                         </div>
                         <div v-else-if="filterValue == 'Pending Tasks'">
                             <img class="pb-4 h-20 w-20 inline" src="../assets/green_success_icon.svg">
@@ -446,6 +446,7 @@ export default {
             let indexValue = this.taskList.findIndex((task) => taskIndex == task.id);
             this.newTask = {
                 ...this.taskList[indexValue],
+                task_status: 'PENDING',
                 createdAt: null
             };
 

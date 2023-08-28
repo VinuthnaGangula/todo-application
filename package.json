@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "npx tailwindcss -i ./src/css/tailwind_input.css -o ./src/css/tailwind_output.css && vue-cli-service serve",
+    "serve": "npx tailwindcss -i ./src/css/tailwind_input.css -o ./dist/tailwind_output.css && vue-cli-service serve",
     "build": "vue-cli-service build"
   },
   "dependencies": {

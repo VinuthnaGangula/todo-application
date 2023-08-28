@@ -264,7 +264,7 @@
             <!-- Bottom Add Icon -->
             <!-- class="sm:hidden px-4 py-4 ring-2 ring-purple-400 fixed bottom-8 right-8 rounded-full bg-purple-100 shadow-xl" @click="addTaskPopupOpen()" -->
             <button
-            class="sm:hidden fixed bottom-8 right-8 rounded-full" @click="addTaskPopupOpen()"
+            class="fixed bottom-8 right-8 rounded-full" @click="addTaskPopupOpen()"
             >
                 <img class="h-16 w-16" src="../assets/add_fill_icon.svg">
             </button>

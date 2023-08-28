@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import '../src/css/tailwind_output.css'
+import '../dist/tailwind_output.css'
 
 Vue.config.productionTip = false
 

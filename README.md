@@ -15,8 +15,8 @@ cd todo-application
 npm install
 ```
 
-### Compiles and hot-reloads for development
-* Run the following command and wait until the build completes.
+## Compiles and hot-reloads for development
+* Run the following command and wait till the build completes.
 ```
 npm run serve
 ```
@@ -26,3 +26,7 @@ npm run serve
 * Use the URL next to 'Network' if you want to open the application in a different device but make sure that you are connected to the same network as the development server.
 
 ![image that shows successful build](/src/assets/todo_app_build.png?raw=true)
+
+
+## Demonstration
+* You can also download and watch the demonstration video file added to the repository(TodoAppDemonstration.mp4).

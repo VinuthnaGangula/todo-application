@@ -2,7 +2,7 @@
 
 ## Cloning Repository
 ```
-https://github.com/VinuthnaGangula/todo-application.git
+git clone https://github.com/VinuthnaGangula/todo-application.git
 
 cd todo-application
 ```

@@ -48,7 +48,7 @@
 
         <!-- Header -->
         <div class="px-4 h-16 bg-purple-100 flex justify-between items-center">
-            <div class="text-xl font-bold text-purple-900">Welcome, {{ name }}!</div>
+            <div class="text-xl font-bold text-purple-900">Welcome!</div>
 
             <button class="h-9 w-9 p-2 rounded bg-purple-900" @click="filterPopupFlag=true;">
                 <img src="../assets/filter_icon.svg">
@@ -67,16 +67,9 @@
                     <div class="h-full p-4 divide-y divide-purple-900">
                         <div class="pb-4">
                             <form id="add-task-form" action="#" @submit="validateForm()">
-                                <div class="pb-4 flex align-center">
-                                    <!-- <div class="flex align-center">
-                                        <button class="h-8 w-8 self-center" v-if="newTask.task_status == 'COMPLETED'" @click="toggleCompleteStatus('new')">
-                                            <img src="../assets/checked_checkbox_icon.svg">
-                                        </button>
-                                        <button class="h-8 w-8 self-center" v-else @click="toggleCompleteStatus('new')">
-                                            <img src="../assets/unchecked_checkbox_icon.svg">
-                                        </button>
-                                    </div> -->
-                                    
+                                <div class="pb-4">
+                                    <p class="pb-2 text-purple-900 text-md font-bold" align="left">Task <span class="font-medium text-sm">(Max 50 characters)</span></p>
+
                                     <input
                                         required
                                         required:border-red-500
@@ -85,22 +78,19 @@
                                         maxlength="50"
                                         :class="[newTask.task_status == 'COMPLETED' ? 'line-through' : '']"
                                         class="appearance-none w-full py-2 px-3 bg-purple-100 text-lg text-purple-900 rounded leading-tight focus:outline-none focus:shadow-outline"
-                                        id="task" type="text" placeholder="Enter task"
+                                        id="task" type="text"
                                         v-model="newTask.task_message"
                                     >
                                 </div>
 
-                                <div class="flex align-center">
-                                    <!-- <img class="h-8 w-8 self-center" src="../assets/due_date_icon.svg"> -->
+                                <div class="">
+                                    <p class="pb-2 text-purple-900 text-md font-bold" align="left">Due Date <span class="font-medium text-sm">(Optional)</span></p>
 
                                     <input
-                                        required
-                                        required:border-red-500
                                         invalid:border-red-500
                                         invalid:text-red-600
                                         class="appearance-none w-full py-2 px-3 text-lg bg-purple-100 text-purple-900 rounded leading-tight focus:outline-none focus:shadow-outline"
-                                        id="due-date" type="text" placeholder="Enter due date"
-                                        onfocus="(type='date')"
+                                        id="due-date" type="date"
                                         v-model="newTask.due_date"
                                     >
                                 </div>
@@ -159,8 +149,6 @@
 
                                         <div v-if="showActionsFlag && task.id == showActionsIndex" class="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-purple-900 ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                                             <div class="px-4 py-2 divide-y divide-solid" role="none">
-                                            <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-
                                                 <div class="pb-2 w-full">
                                                     <button class="flex align-center" @click="editTaskOpen(task.id)">
                                                         <img class="h-9 w-9 bg-purple-900 p-2 rounded" src="../assets/edit_icon.svg">
@@ -181,12 +169,6 @@
                                                         <p class="text-purple-900 block ml-4 text-lg" tabindex="-1" id="menu-item-2">Duplicate</p>
                                                     </button>
                                                 </div>
-                                            
-                                            
-                                            
-                                            <!-- <form method="POST" action="#" role="none">
-                                                <button type="submit" class="text-gray-700 block w-full px-4 py-2 text-left text-sm" role="menuitem" tabindex="-1" id="menu-item-3">Sign out</button>
-                                            </form> -->
                                             </div>
                                         </div>
                                     </div>
@@ -214,7 +196,7 @@
                                             maxlength="30"
                                             :class="[editTaskData.task_status == 'COMPLETED' ? 'line-through' : '']"
                                             class="appearance-none w-full ml-4 py-2 px-3 bg-purple-100 text-lg text-purple-900 rounded border border-purple-900 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="task" type="text" placeholder="Enter task"
+                                            id="task" type="text"
                                             v-model="editTaskData.task_message"
                                         >
                                     </div>
@@ -223,12 +205,10 @@
                                         <img class="h-8 w-8 self-center" src="../assets/due_date_icon.svg">
 
                                         <input
-                                            required
-                                            required:border-red-500
                                             invalid:border-red-500
                                             invalid:text-red-600
                                             class="appearance-none w-full ml-4 py-2 px-3 bg-purple-100 text-lg text-purple-900 rounded border border-purple-900 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="due-date" type="date" placeholder="Enter due date (YYYY-MM-DD)"
+                                            id="due-date" type="date" placeholder="Enter due date"
                                             v-model="editTaskData.due_date"
                                             @change="onDueDateUpdate(editTaskIndex)"
                                         >
@@ -262,7 +242,6 @@
             </div>
 
             <!-- Bottom Add Icon -->
-            <!-- class="sm:hidden px-4 py-4 ring-2 ring-purple-400 fixed bottom-8 right-8 rounded-full bg-purple-100 shadow-xl" @click="addTaskPopupOpen()" -->
             <button
             class="fixed bottom-8 right-8 rounded-full" @click="addTaskPopupOpen()"
             >
@@ -310,28 +289,20 @@ export default {
     },
     watch: {
         taskList() {
-            console.log('console.log', this.taskList);
-            console.log('this.filterValue: ', this.filterValue);
             if (this.filterValue == 'All Tasks') {
-                console.log('spy 1');
                 this.tasksToDisplay = this.taskList;
             } else if (this.filterValue == 'Pending Tasks') {
-                console.log('spy 2');
                 this.tasksToDisplay = this.taskList.length > 0 ? this.taskList.filter((taskItem) => taskItem.task_status != 'COMPLETED') : [];
             } else if (this.filterValue == 'Completed Tasks') {
-                console.log('spy 3');
                 this.tasksToDisplay = this.taskList.length > 0 ? this.taskList.filter((taskItem) => taskItem.task_status == 'COMPLETED') : [];
             }
         },
         filterValue() {
             if (this.filterValue == 'All Tasks') {
-                console.log('spy 1');
                 this.tasksToDisplay = this.taskList;
             } else if (this.filterValue == 'Pending Tasks') {
-                console.log('spy 2');
                 this.tasksToDisplay = this.taskList.length > 0 ? this.taskList.filter((taskItem) => taskItem.task_status != 'COMPLETED') : [];
             } else if (this.filterValue == 'Completed Tasks') {
-                console.log('spy 3');
                 this.tasksToDisplay = this.taskList.length > 0 ? this.taskList.filter((taskItem) => taskItem.task_status == 'COMPLETED') : [];
             }
         }
@@ -358,7 +329,7 @@ export default {
             this.showActionsFlag = !this.showActionsFlag;
         },
         onDueDateUpdate() {
-            this.editTaskData = { ...this.editTaskData, task_status: this.editTaskData.task_status != 'COMPLETED' ? this.editTaskData.due_date && new Date(this.editTaskData.due_date).getTime() < Date.now() ? 'OVERTIME_PENDING' : 'PENDING' : 'COMPLETED' };
+            this.editTaskData = { ...this.editTaskData, task_status: this.editTaskData.task_status != 'COMPLETED' ? this.editTaskData.due_date && this.editTaskData.due_date < new Date().toISOString().split('T')[0] ? 'OVERTIME_PENDING' : 'PENDING' : 'COMPLETED' };
         },
         addTaskPopupOpen() {
             this.newTask = {
@@ -374,8 +345,7 @@ export default {
             this.taskList.push({
                 ...this.newTask,
                 id: this.nextIndex,
-                // task_status: (this.newTask.due_date && new Date(this.newTask.due_date).getTime() < Date.now() ? 'OVERTIME_PENDING' : 'PENDING'),
-                task_status: (this.newTask.task_status != 'COMPLETED' ? this.newTask.due_date && new Date(this.newTask.due_date).getTime() < Date.now() ? 'OVERTIME_PENDING' : 'PENDING' : 'COMPLETED'),
+                task_status: (this.newTask.task_status != 'COMPLETED' ? this.newTask.due_date && this.newTask.due_date < new Date().toISOString().split('T')[0] ? 'OVERTIME_PENDING' : 'PENDING' : 'COMPLETED'),
                 createdAt: Date.now()
             });
             
@@ -409,16 +379,16 @@ export default {
         },
         editTask() {
             let indexValue = this.taskList.findIndex((task) => this.editTaskIndex == task.id);
-            console.log('this.editTaskData: ', this.editTaskData);
             this.taskList[indexValue] = Object.assign({}, this.editTaskData);
 
-            // Update Local Storage.
+            // Update Storage.
             this.$store.dispatch("changeTaskList", this.taskList);
-            // localStorage.setItem('task_list', JSON.stringify(this.taskList));
 
             this.editTaskData = {};
             this.editTaskIndex = null;
             this.editTaskFlag = false;
+
+            this.$router.go();
         },
         deleteTaskPopup(taskIndex) {
             this.deleteTaskIndex = taskIndex;
@@ -431,8 +401,7 @@ export default {
             let indexValue = this.taskList.findIndex((task) => this.deleteTaskIndex == task.id);
             this.taskList.splice(indexValue, 1);
 
-            // Update Local Storage.
-            // localStorage.setItem('task_list', JSON.stringify(this.taskList));
+            // Update Storage.
             this.$store.dispatch("changeTaskList", this.taskList);
 
             this.deleteTaskIndex = null;
@@ -450,27 +419,21 @@ export default {
                 createdAt: null
             };
 
-            console.log('this.newTask: ', this.newTask);
             this.showActionsIndex = null;
             this.showActionsFlag = false;
             this.addTaskFlag = true;
         },
         toggleCompleteStatus(taskType, taskIndex) {
             if (taskType == 'new') {
-                this.newTask.task_status = this.newTask.task_status == 'COMPLETED' ? this.newTask.due_date && new Date(this.newTask.due_date).getTime() < Date.now() ? 'OVERTIME_PENDING' : 'PENDING' : 'COMPLETED';
+                this.newTask.task_status = this.newTask.task_status == 'COMPLETED' ? this.newTask.due_date && this.newTask.due_date < new Date().toISOString().split('T')[0] ? 'OVERTIME_PENDING' : 'PENDING' : 'COMPLETED';
             } else if (taskType == 'edit') {
-                console.log('edit toggle');
-                this.editTaskData.task_status = this.editTaskData.task_status == 'COMPLETED' ? this.editTaskData.due_date && new Date(this.editTaskData.due_date).getTime() < Date.now() ? 'OVERTIME_PENDING' : 'PENDING' : 'COMPLETED';
-                console.log('this.editTaskData.task_status: ', this.editTaskData.task_status);
+                this.editTaskData.task_status = this.editTaskData.task_status == 'COMPLETED' ? this.editTaskData.due_date && this.editTaskData.due_date < new Date().toISOString().split('T')[0] ? 'OVERTIME_PENDING' : 'PENDING' : 'COMPLETED';
             } else {
-                console.log('called');
                 let indexValue = this.taskList.findIndex((task) => taskIndex == task.id);
-                this.taskList[indexValue].task_status = this.taskList[indexValue].task_status == 'COMPLETED' ? this.taskList[indexValue].due_date && new Date(this.taskList[indexValue].due_date).getTime() < Date.now() ? 'OVERTIME_PENDING' : 'PENDING' : 'COMPLETED';
-                console.log('this.taskList[indexValue].task_status: ', this.taskList[indexValue].task_status);
+                this.taskList[indexValue].task_status = this.taskList[indexValue].task_status == 'COMPLETED' ? this.taskList[indexValue].due_date && this.taskList[indexValue].due_date < new Date().toISOString().split('T')[0] ? 'OVERTIME_PENDING' : 'PENDING' : 'COMPLETED';
             }
 
-            // Update Local Storage.
-            // localStorage.setItem('task_list', JSON.stringify(this.taskList));
+            // Update Storage.
             this.$store.dispatch("changeTaskList", this.taskList);
         },
         filterPopupClose(filterItemValue) {

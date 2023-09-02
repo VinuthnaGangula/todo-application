@@ -25,4 +25,4 @@ npm run serve
 * Open browser in your system and use the URL next to 'Local' from the command prompt (Its usually 'http://localhost:8080/').
 * Use the URL next to 'Network' if you want to open the application in a different device but make sure that you are connected to the same network as the development server.
 
-![image that shows successful build]('./src/assets/todo_app_build.png')
+![image that shows successful build](/src/assets/todo_app_build.png)
